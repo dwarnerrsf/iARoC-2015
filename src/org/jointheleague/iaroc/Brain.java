@@ -27,5 +27,5 @@ public class Brain extends IRobotCreateAdapter {
 
     }
     /* This method is called repeatedly. */
-    public void loop() throws ConnectionLostException {}
+    public void loop() throws ConnectionLostException {driveDirect(50,100);}
 }
