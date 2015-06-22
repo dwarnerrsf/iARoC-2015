@@ -1,7 +1,10 @@
 package org.jointheleague.iaroc;
 
+import android.os.SystemClock;
+
 import ioio.lib.api.IOIO;
 import ioio.lib.api.exception.ConnectionLostException;
+
 import org.jointheleague.erik.irobot.IRobotCreateAdapter;
 import org.jointheleague.erik.irobot.IRobotCreateInterface;
 import org.jointheleague.iaroc.sensors.UltraSonicSensors;
@@ -23,11 +26,23 @@ public class Brain extends IRobotCreateAdapter {
         //what would you like me to do, Clever Human?
 
 
-
-
     }
+
     /* This method is called repeatedly. */
     public void loop() throws ConnectionLostException {
-        //code for looping
+        readSensors(SENSORS_BUMPS_AND_WHEEL_DROPS);
+        driveDirect(250, 500);
+        if (isBumpRight()) {
+            driveDirect(400, -400);
+            SystemClock.sleep(300);
+        }
+        if (isBumpLeft()) {
+            driveDirect(300, 200);
+            SystemClock.sleep(300);
+        }
+        if (isBumpRight() && isBumpLeft()) {
+            driveDirect(-400, -400);
+            SystemClock.sleep(300);
+        }
     }
 }
